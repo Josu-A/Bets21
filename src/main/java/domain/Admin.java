@@ -2,6 +2,8 @@ package domain;
 
 import javax.persistence.Entity;
 
+// testing commets
+
 @Entity
 public class Admin extends Erabiltzaile {
 
