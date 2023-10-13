@@ -2,7 +2,6 @@ package domain;
 
 import java.io.*;
 import java.util.ArrayList;
-//import java.util.Date;
 import java.util.Vector;
 
 import javax.persistence.*;
@@ -21,13 +20,13 @@ public class Question implements Serializable {
 	@XmlJavaTypeAdapter(IntegerAdapter.class)
 	@GeneratedValue
 	private Integer questionNumber;
-	private String question; 
+	private String questionName; 
 	private float betMinimum;
 	private String result;  
 	@XmlIDREF
 	private Event event;
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
-	private ArrayList<Integer> apostatu = new ArrayList<Integer>();
+	private ArrayList<Integer> apostatu = new ArrayList<>();
 
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.PERSIST)
 	private Vector<Quote> quoteList = new Vector<Quote>();
@@ -39,7 +38,7 @@ public class Question implements Serializable {
 	public Question(Integer queryNumber, String query, float betMinimum, Event event,Vector<Quote> quoteList ) {// ,) {
 		super();
 		this.questionNumber = queryNumber;
-		this.question = query;
+		this.questionName = query;
 		this.betMinimum=betMinimum;
 		this.event = event;
 		this.quoteList= quoteList;
@@ -48,7 +47,7 @@ public class Question implements Serializable {
 	
 	public Question(String query, float betMinimum,  Event event) {
 		super();
-		this.question = query;
+		this.questionName = query;
 		this.betMinimum=betMinimum;
 		this.event = event;
 	}
@@ -75,7 +74,7 @@ public class Question implements Serializable {
 	 */
 
 	public String getQuestion() {
-		return question;
+		return questionName;
 	}
 
 	/**
@@ -83,7 +82,7 @@ public class Question implements Serializable {
 	 * @param question to be setted
 	 */	
 	public void setQuestion(String question) {
-		this.question = question;
+		this.questionName = question;
 	}
 
 	/**
@@ -149,7 +148,7 @@ public class Question implements Serializable {
 	//######################
 
 	public String toString(){
-		return questionNumber+";"+question+";"+Float.toString(betMinimum);
+		return questionNumber+";"+questionName+";"+Float.toString(betMinimum);
 	}
 
 
