@@ -175,7 +175,7 @@ public class Question implements Serializable {
 		int j = 0;
 		boolean aurkitua = false;
 		while (j<apostatu.size() && !aurkitua) {
-			if (apostatu.get(j)==i) {
+			if (apostatu.get(j).equals(i)) {
 				aurkitua=true;
 				apostatu.remove(j);
 			}

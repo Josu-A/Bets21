@@ -407,7 +407,7 @@ public class DataAccess {
 			db.getTransaction().begin();
 			for (Mugimendua m : u.getMugimenduak()) {
 				if (m.getGertaera() != null) {
-					if (m.getGertaera().getEventNumber() == event.getEventNumber()) {
+					if (m.getGertaera().getEventNumber().equals(event.getEventNumber())) {
 						dirua = m.getDiruKop();
 					}
 				}
