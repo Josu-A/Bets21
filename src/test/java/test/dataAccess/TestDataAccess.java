@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
 import configuration.ConfigXML;
 import domain.Event;
 import domain.Question;
+import domain.User;
 
 public class TestDataAccess {
 	protected  EntityManager  db;
@@ -88,6 +89,39 @@ public class TestDataAccess {
 			} else 
 			return false;
 			
+		}
+		
+		public boolean storeUser(User u) {
+			boolean ok = false;
+			try {
+				db.getTransaction().begin();
+				db.persist(u);
+				db.getTransaction().commit();
+				ok = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return ok;
+		}
+		
+		public User getUser(User u) {
+			System.out.println(">> DataAccess: getMugimenduak=> User= " + u);
+			User user = db.find(User.class, u);
+			return user;
+		}
+		
+		public boolean removeUser(User user) {
+			boolean ok = false;
+			try {
+				User u = db.find(User.class, user);
+				db.getTransaction().begin();
+				db.remove(u);
+				db.getTransaction().commit();
+				ok = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return ok;
 		}
 }
 
