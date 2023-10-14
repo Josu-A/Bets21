@@ -112,5 +112,7 @@ public interface BLFacade  {
 	@WebMethod public boolean pasahitzaAldatu(User u,String pass);
 
 	@WebMethod public boolean erabiltzaileaJarraitu(User target , User jarraitzaile);
+	
+	@WebMethod public boolean returnMoney(User user, Event event);
 
 }

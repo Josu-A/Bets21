@@ -424,4 +424,12 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 		return emaitza;
 	}
+	
+	@WebMethod
+	public boolean returnMoney(User user, Event event) {
+		dbManager.open(false);
+		boolean emaitza = dbManager.returnMoney(user, event);
+		dbManager.close();
+		return emaitza;
+	}
 }
