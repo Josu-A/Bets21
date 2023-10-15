@@ -64,13 +64,15 @@ public class ReturnMoneyDABTest {
     		testDA.storeUser(u);
     		testDA.close();
     		
+    		sut.open(false);
     		sut.returnMoney(u, e);
+    		sut.close();
     		
     		testDA.open();
     		double res = testDA.getUser(u).getDirua();
     		testDA.close();
     		
-    		assertEquals((Double) res, Double.valueOf(expected + 20));
+    		assertEquals(Double.valueOf(expected + 20), (Double) res);
     		
     	} catch (Exception e) {
     		fail();

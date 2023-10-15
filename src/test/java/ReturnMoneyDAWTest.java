@@ -147,13 +147,14 @@ public class ReturnMoneyDAWTest {
     		testDA.storeUser(u);
     		testDA.close();
     		
+    		sut.open(false);
     		sut.returnMoney(u, e);
+    		sut.close();
     		
     		testDA.open();
     		double res = testDA.getUser(u).getDirua();
     		testDA.close();
-    		
-    		assertEquals((Double) res, Double.valueOf(expected));
+    		assertEquals(Double.valueOf(expected), (Double) res);
     		
     	} catch (Exception e) {
     		fail();

@@ -39,5 +39,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/objectdb.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
