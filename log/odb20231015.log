@@ -1095,3 +1095,47 @@ Type domain.Langile is not enhanced.
 [2023-10-15 22:48:02 #14 type] 
 Type domain.Apostatu is not enhanced.
 
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-10-15 23:37:18 #1 store] 
+Database '/home/josu/git/Bets21/src/main/resources/bets.temp' has been recovered (tr. 526-534)
+
+[2023-10-15 23:37:18 #2 store] 
+Database '/home/josu/git/Bets21/src/main/resources/bets.temp' is opened by 101992@jabox
+
+[2023-10-15 23:37:18 #3 store] 
+Configuration path: /home/josu/git/Bets21/objectdb.conf
+
+[2023-10-15 23:37:18 #4 type] 
+Type domain.Erabiltzaile is not enhanced.
+
+[2023-10-15 23:37:18 #5 type] 
+Type domain.User is not enhanced.
+
+[2023-10-15 23:37:18 #6 type] 
+Type domain.Buzoia is not enhanced.
+
+[2023-10-15 23:37:18 #7 type] 
+Type domain.Mugimendua is not enhanced.
+
+[2023-10-15 23:37:18 #8 type] 
+Type domain.Mezua is not enhanced.
+
+[2023-10-15 23:37:18 #9 type] 
+Type domain.Question is not enhanced.
+
+[2023-10-15 23:37:18 #10 type] 
+Type domain.Event is not enhanced.
+
+[2023-10-15 23:37:18 #11 type] 
+Type domain.Quote is not enhanced.
+
+[2023-10-15 23:37:18 #12 type] 
+Type domain.Admin is not enhanced.
+
+[2023-10-15 23:37:18 #13 type] 
+Type domain.Langile is not enhanced.
+
+[2023-10-15 23:37:18 #14 type] 
+Type domain.Apostatu is not enhanced.
+
