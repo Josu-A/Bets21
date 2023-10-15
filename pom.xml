@@ -55,7 +55,6 @@
 		<sonar.organization>josu-a</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.projectKey>Josu-A_Bets21</sonar.projectKey>
-		<sonar.login>eacce2909849f8b1ac9e196347f69367e77c58f8</sonar.login>
 	</properties>
 
 	<!-- https://mvnrepository.com/artifact/junit/junit -->
