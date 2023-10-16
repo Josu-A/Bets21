@@ -119,24 +119,24 @@ public class CreateQuestionBLBMTest {
         }
     }
     @Test
-    public void test7() {
+    public void test7() throws QuestionAlreadyExist {
+    	//define paramaters
+        String queryText="proba galdera";
+        Float betMinimum=new Float(2);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date oneDate=null;;
         try {
-            //define paramaters
-            String queryText="proba galdera";
-            Float betMinimum=new Float(2);
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date oneDate=null;;
-            try {
-                oneDate = sdf.parse("05/10/2022");
-            } catch (ParseException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }	
-            
-            //configure Mock
-            Mockito.doReturn(oneDate).when(mockedEvent).getEventDate();
-            Mockito.when(dataAccess.createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class))).thenThrow(QuestionAlreadyExist.class);
+            oneDate = sdf.parse("05/10/2022");
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }	
+        
+        //configure Mock
+        Mockito.doReturn(oneDate).when(mockedEvent).getEventDate();
+        Mockito.when(dataAccess.createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class))).thenThrow(QuestionAlreadyExist.class);
 
+        try {
             //invoke System Under Test (sut)
             sut.createQuestion(mockedEvent, queryText, betMinimum);
 
