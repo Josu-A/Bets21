@@ -85,7 +85,7 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 
 		return qry;
-	};
+	}
 
 	@WebMethod
 	public Quote createQuote(String quote, Question question, double mult) {
