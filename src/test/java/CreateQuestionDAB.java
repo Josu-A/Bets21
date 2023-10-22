@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import dataAccess.QuestionBet;
 import domain.Event;
 import domain.Question;
 import exceptions.EventFinished;
@@ -53,7 +54,7 @@ public class CreateQuestionDAB {
 			testDA.close();			
 			
 			//invoke System Under Test (sut)  
-			Question q=sut.createQuestion(ev, queryText, betMinimum);
+			Question q=sut.createQuestion(ev, new QuestionBet(queryText, betMinimum));
 			
 			
 			//verify the results
@@ -100,7 +101,7 @@ public class CreateQuestionDAB {
 				}	
 				
 				//invoke System Under Test (sut)  
-				Question q=sut.createQuestion(null, queryText, betMinimum);
+				Question q=sut.createQuestion(null, new QuestionBet(queryText, betMinimum));
 				
 				
 				//verify the results
@@ -138,7 +139,7 @@ public class CreateQuestionDAB {
 			testDA.close();			
 			
 			//invoke System Under Test (sut)  
-			Question q=sut.createQuestion(ev, queryText, betMinimum);
+			Question q=sut.createQuestion(ev, new QuestionBet(queryText, betMinimum));
 			
 			
 			//verify the results

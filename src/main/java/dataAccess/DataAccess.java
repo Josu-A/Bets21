@@ -122,9 +122,10 @@ public class DataAccess {
 			Mugimendua mug = new Mugimendua(100, ev1, q1, "abibidea");
 			lista.add(mug);
 
-			User user1 = new User("user", "izena", "abizena", "user", 26, "asd@gmail.com", 0, lista);
-			Admin user2 = new Admin("admin", "izena", "abizena", "admin", 26, "asd@gmail.com");
-			Langile user3 = new Langile("langile", "izena", "abizena", "langile", 26, "asd@gmail.com");
+			String defaultEmail = "asd@gmail.com";
+			User user1 = new User("user", "izena", "abizena", "user", 26, defaultEmail, 0, lista);
+			Admin user2 = new Admin("admin", "izena", "abizena", "admin", 26, defaultEmail);
+			Langile user3 = new Langile("langile", "izena", "abizena", "langile", 26, defaultEmail);
 			Buzoia buzoi1 = new Buzoia (new LinkedList<Mezua>() , user1);
 			Buzoia buzoi2 = new Buzoia (new LinkedList<Mezua>() , user2 );
 			Buzoia buzoi3 = new Buzoia (new LinkedList<Mezua>() , user3);
@@ -255,24 +256,23 @@ public class DataAccess {
 	 * minimum bet
 	 * 
 	 * @param event      to which question is added
-	 * @param question   text of the question
-	 * @param betMinimum minimum quantity of the bet
+	 * @param questionBet   object containing the text of the question and the minimum quantity of the bet
 	 * @return the created question, or null, or an exception
 	 * @throws QuestionAlreadyExist if the same question already exists for the
 	 *                              event
 	 */
 
-	public Question createQuestion(Event event, String question, float betMinimum) throws QuestionAlreadyExist {
-		System.out.println(">> DataAccess: createQuestion=> event= " + event + " question= " + question + " betMinimum="
-				+ betMinimum);
+	public Question createQuestion(Event event, QuestionBet questionBet) throws QuestionAlreadyExist {
+		System.out.println(">> DataAccess: createQuestion=> event= " + event + " question= " + questionBet.getQuestion() + " betMinimum="
+				+ questionBet.getBetMinimum());
 
 		Event ev = db.find(Event.class, event.getEventNumber());
 
-		if (ev.DoesQuestionExists(question))
+		if (ev.DoesQuestionExists(questionBet.getQuestion()))
 			throw new QuestionAlreadyExist(ResourceBundle.getBundle("Etiquetas").getString("ErrorQueryAlreadyExist"));
 
 		db.getTransaction().begin();
-		Question q = ev.addQuestion(question, betMinimum);
+		Question q = ev.addQuestion(questionBet.getQuestion(), questionBet.getBetMinimum());
 		// db.persist(q);
 		db.persist(ev); // db.persist(q) not required when CascadeType.PERSIST is added in questions
 						// property of Event class
@@ -349,11 +349,7 @@ public class DataAccess {
 		System.out.println("Opening DataAccess instance => isDatabaseLocal: " + c.isDatabaseLocal()
 				+ " getDatabBaseOpenMode: " + c.getDataBaseOpenMode());
 
-		String fileName = c.getDbFilename();
-		if (initializeMode) {
-			fileName = fileName + ";drop";
-			System.out.println("Deleting the DataBase");
-		}
+		String fileName = getDBInitializationName(initializeMode);
 
 		if (c.isDatabaseLocal()) {
 			emf = Persistence.createEntityManagerFactory("objectdb:" + fileName);
@@ -369,6 +365,15 @@ public class DataAccess {
 			db = emf.createEntityManager();
 		}
 
+	}
+	
+	public String getDBInitializationName(boolean initializeMode) {
+		String fileName = c.getDbFilename();
+		if (initializeMode) {
+			fileName = fileName + ";drop";
+			System.out.println("Deleting the DataBase");
+		}
+		return fileName;
 	}
 
 	public boolean existQuestion(Event event, String question) {
@@ -405,13 +410,7 @@ public class DataAccess {
 		try {
 			User u = db.find(User.class, user);
 			db.getTransaction().begin();
-			for (Mugimendua m : u.getMugimenduak()) {
-				if (m.getGertaera() != null) {
-					if (m.getGertaera().getEventNumber().equals(event.getEventNumber())) {
-						dirua = m.getDiruKop();
-					}
-				}
-			}
+			dirua = getBetMoney(u, event);
 			u.setDirua(u.getDirua() + dirua);
 			db.getTransaction().commit();
 			ok = true;
@@ -419,6 +418,17 @@ public class DataAccess {
 			e.printStackTrace();
 		}
 		return ok;
+	}
+	
+	public double getBetMoney(User user, Event event) {
+		for (Mugimendua m : user.getMugimenduak()) {
+			if (m.getGertaera() != null) {
+				if (m.getGertaera().getEventNumber().equals(event.getEventNumber())) {
+					return m.getDiruKop();
+				}
+			}
+		}
+		return 0;
 	}
 
 	public boolean deleteQuestion(Question question) {

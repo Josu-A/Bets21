@@ -11,6 +11,7 @@ import javax.jws.WebService;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import dataAccess.QuestionBet;
 import domain.Question;
 import domain.Quote;
 import domain.User;
@@ -80,12 +81,12 @@ public class BLFacadeImplementation implements BLFacade {
 		if (new Date().compareTo(event.getEventDate()) > 0)
 			throw new EventFinished(ResourceBundle.getBundle("Etiquetas").getString("ErrorEventHasFinished"));
 
-		qry = dbManager.createQuestion(event, question, betMinimum);
+		qry = dbManager.createQuestion(event, new QuestionBet(question, betMinimum));
 
 		dbManager.close();
 
 		return qry;
-	};
+	}
 
 	@WebMethod
 	public Quote createQuote(String quote, Question question, double mult) {

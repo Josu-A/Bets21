@@ -11,6 +11,7 @@ import org.junit.Test;
 import businessLogic.BLFacade;
 import businessLogic.BLFacadeImplementation;
 import dataAccess.DataAccess;
+import dataAccess.QuestionBet;
 import domain.Event;
 import domain.Question;
 import exceptions.EventFinished;
@@ -52,7 +53,7 @@ public class CreateQuestionBLBMTest {
 				
             //configure Mock
             Mockito.doReturn(oneDate).when(mockedEvent).getEventDate();
-            Mockito.doReturn(new Question(queryText, betMinimum,mockedEvent)).when(dataAccess).createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class));
+            Mockito.doReturn(new Question(queryText, betMinimum,mockedEvent)).when(dataAccess).createQuestion(Mockito.any(Event.class),Mockito.any(QuestionBet.class));
 
             //invoke System Under Test (sut) 
             Question q=sut.createQuestion(mockedEvent, queryText, betMinimum);
@@ -64,7 +65,7 @@ public class CreateQuestionBLBMTest {
             ArgumentCaptor<String> questionStringCaptor = ArgumentCaptor.forClass(String.class);
             ArgumentCaptor<Float> betMinimunCaptor = ArgumentCaptor.forClass(Float.class);
 
-            Mockito.verify(dataAccess,Mockito.times(1)).createQuestion(eventCaptor.capture(),questionStringCaptor.capture(), betMinimunCaptor.capture());
+            Mockito.verify(dataAccess,Mockito.times(1)).createQuestion(eventCaptor.capture(), new QuestionBet(questionStringCaptor.capture(), betMinimunCaptor.capture()));
             Float f=betMinimunCaptor.getValue();
 
             assertEquals(eventCaptor.getValue(),mockedEvent);
@@ -98,14 +99,14 @@ public class CreateQuestionBLBMTest {
             
             //configure Mock
             Mockito.doReturn(oneDate).when(mockedEvent).getEventDate();
-            Mockito.doReturn(null).when(dataAccess).createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class));
+            Mockito.doReturn(null).when(dataAccess).createQuestion(Mockito.any(Event.class),Mockito.any(QuestionBet.class));
 
 
             //invoke System Under Test (sut) 
             Question q=sut.createQuestion(null, queryText, betMinimum);
             
             //verify the results
-            Mockito.verify(dataAccess,Mockito.times(1)).createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class));
+            Mockito.verify(dataAccess,Mockito.times(1)).createQuestion(Mockito.any(Event.class),Mockito.any(QuestionBet.class));
 
             assertTrue(q==null);
 
@@ -134,7 +135,7 @@ public class CreateQuestionBLBMTest {
         
         //configure Mock
         Mockito.doReturn(oneDate).when(mockedEvent).getEventDate();
-        Mockito.when(dataAccess.createQuestion(Mockito.any(Event.class),Mockito.any(String.class), Mockito.any(Integer.class))).thenThrow(QuestionAlreadyExist.class);
+        Mockito.when(dataAccess.createQuestion(Mockito.any(Event.class),Mockito.any(QuestionBet.class))).thenThrow(QuestionAlreadyExist.class);
 
         try {
             //invoke System Under Test (sut)

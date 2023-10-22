@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import configuration.ConfigXML;
 import dataAccess.DataAccess;
+import dataAccess.QuestionBet;
 import domain.Event;
 import domain.Question;
 import exceptions.EventFinished;
@@ -53,7 +54,7 @@ public class CreateQuestionDAW {
 			
 			
 			//invoke System Under Test (sut)  
-			sut.createQuestion(ev, queryText, betMinimum);
+			sut.createQuestion(ev, new QuestionBet(queryText, betMinimum));
 			
 			
 			//if the program continues fail
@@ -95,7 +96,7 @@ public class CreateQuestionDAW {
 			testDA.close();			
 			
 			//invoke System Under Test (sut)  
-			Question q=sut.createQuestion(ev, queryText, betMinimum);
+			Question q=sut.createQuestion(ev, new QuestionBet(queryText, betMinimum));
 			
 			
 			//verify the results
