@@ -1,13 +1,17 @@
 package gui;
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.UIManager;
 
 import configuration.ConfigXML;
+import domain.Event;
 import businessLogic.BLFacade;
 import businessLogic.BLFactory;
+import businessLogic.ExtendedIterator;
 
 public class ApplicationLauncher { 
 	
@@ -35,6 +39,30 @@ public class ApplicationLauncher {
 			UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 			
 			appFacadeInterface = BLFactory.createBusinessLogic(c);
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			Date date = sdf.parse("17/06/2023");
+			ExtendedIterator<Event> i = appFacadeInterface.getEventsIterator(date);
+			
+			Event e;
+			
+			System.out.println("____________________");
+			System.out.println("ATZETIK AURRERAKA");
+			
+			i.goLast();
+			while (i.hasPrevious()) {
+				e = i.previous();
+				System.out.println(e.toString());
+			}
+			
+			System.out.println("\n____________________");
+			System.out.println("AURRETIK ATZERA");
+			
+			i.goFirst();
+			while (i.hasNext()) {
+				e = i.next();
+				System.out.println(e.toString());
+			}
 			
 			/*if (c.getDataBaseOpenMode().equals("initialize")) 
 				appFacadeInterface.initializeBD();
