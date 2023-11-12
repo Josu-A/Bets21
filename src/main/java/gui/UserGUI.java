@@ -29,6 +29,7 @@ public class UserGUI extends JFrame {
 	private JPanel jContentPane = null;
 	private JButton jButtonQueryQueries = null;
 	private JButton jButtonMugimenduak=null;
+	private JButton jButtonMugTable=null;
 	private JButton jButtonDirua=null;
 	private JButton jButtonMezua=null;
 	private JButton jButtonMezuaIkusi=null;
@@ -109,6 +110,7 @@ public class UserGUI extends JFrame {
 			jContentPane.add(getBoton8());
 			jContentPane.add(getBoton9());
 			jContentPane.add(getBoton10());
+			jContentPane.add(getBotonMovTable());
 			jContentPane.add(getPanel());
 		}
 		return jContentPane;
@@ -147,6 +149,21 @@ public class UserGUI extends JFrame {
 			});
 		}
 		return jButtonMugimenduak;
+	}
+	
+	private JButton getBotonMovTable() {
+		if (jButtonMugTable == null) {
+			User u = user;
+			jButtonMugTable = new JButton();
+			jButtonMugTable.setText(ResourceBundle.getBundle("Etiquetas").getString("MovementTableOf") + u.getIzena() + u.getAbizena());
+			jButtonMugTable.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					JFrame a = new SeeMovementsTableGUI(u);
+					a.setVisible(true);
+				}
+			});
+		}
+		return jButtonMugTable;
 	}
 	
 	private JButton getBoton6() {
