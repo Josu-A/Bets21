@@ -1,0 +1,38 @@
+------------------------------------------------------------------------------------------------------------------------
+
+[2023-11-17 16:25:57 #1 store] 
+Database '/home/josu/git/Bets21/src/main/resources/bets.temp' is opened by 127689@jabox
+
+[2023-11-17 16:25:57 #2 store] 
+Configuration path: /home/josu/git/Bets21/objectdb.conf
+
+[2023-11-17 16:25:57 #3 type] 
+Type domain.Erabiltzaile is not enhanced.
+
+[2023-11-17 16:25:57 #4 type] 
+Type domain.User is not enhanced.
+
+[2023-11-17 16:25:57 #5 type] 
+Type domain.Buzoia is not enhanced.
+
+[2023-11-17 16:25:57 #6 type] 
+Type domain.Mugimendua is not enhanced.
+
+[2023-11-17 16:25:58 #7 type] 
+Type domain.Mezua is not enhanced.
+
+[2023-11-17 16:25:58 #8 type] 
+Type domain.Question is not enhanced.
+
+[2023-11-17 16:25:58 #9 type] 
+Type domain.Event is not enhanced.
+
+[2023-11-17 16:25:58 #10 type] 
+Type domain.Quote is not enhanced.
+
+[2023-11-17 16:25:58 #11 type] 
+Type domain.Admin is not enhanced.
+
+[2023-11-17 16:25:58 #12 type] 
+Type domain.Langile is not enhanced.
+
