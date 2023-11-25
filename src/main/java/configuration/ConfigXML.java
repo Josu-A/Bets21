@@ -2,6 +2,7 @@ package configuration;
 
 import java.io.File;
 import java.io.InputStream;
+import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -79,6 +80,11 @@ public class ConfigXML {
 			  dbFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 			  DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			  
+			  URL resourceUrl = getClass().getClassLoader().getResource(this.configFile);
+			  if (resourceUrl == null) {
+				  this.configFile = "configuration/config.xml";
+			  }
+			  			  
 			  try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(this.configFile)) {
 				  if (inputStream != null) {
 					  Document doc = dBuilder.parse(inputStream);
