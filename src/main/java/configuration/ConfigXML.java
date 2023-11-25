@@ -82,7 +82,7 @@ public class ConfigXML {
 			  
 			  URL resourceUrl = getClass().getClassLoader().getResource(this.configFile);
 			  if (resourceUrl == null) {
-				  this.configFile = "configuration/config.xml";
+				  this.configFile = "resources/config.xml";
 			  }
 			  			  
 			  try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(this.configFile)) {
