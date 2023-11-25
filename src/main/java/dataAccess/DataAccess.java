@@ -351,14 +351,8 @@ public class DataAccess {
 				+ " getDatabBaseOpenMode: " + c.getDataBaseOpenMode());
 
 		String fileName = getDBInitializationName(initializeMode);
-		
-		URL resourceUrl = getClass().getClassLoader().getResource(fileName);
-		fileName = resourceUrl != null ?
-				"src/main/resources/" + fileName :
-				"resources/" + fileName;
-
 		if (c.isDatabaseLocal()) {
-			emf = Persistence.createEntityManagerFactory("objectdb:" + fileName);
+			emf = Persistence.createEntityManagerFactory("objectdb:src/main/resources/" + fileName);
 			db = emf.createEntityManager();
 		} else {
 			Map<String, String> properties = new HashMap<String, String>();
