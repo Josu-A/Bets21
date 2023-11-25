@@ -15,7 +15,7 @@ import org.w3c.dom.NodeList;
  */
 public class ConfigXML {
 	
-	private String configFile = "src/main/resources/config.xml";
+	private String configFile = "config.xml";
 		
 	private String businessLogicNode;
 
@@ -77,7 +77,7 @@ public class ConfigXML {
 			  DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			  dbFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
 			  DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			  Document doc = dBuilder.parse(new File(configFile));
+			  Document doc = dBuilder.parse(getClass().getClassLoader().getResourceAsStream(this.configFile));
 			  doc.getDocumentElement().normalize();
 
 			  NodeList list = doc.getElementsByTagName("config");
