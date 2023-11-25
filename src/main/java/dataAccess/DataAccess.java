@@ -1,5 +1,6 @@
 package dataAccess;
 
+import java.net.URL;
 //hello
 import java.util.Calendar;
 import java.util.Date;
@@ -350,6 +351,11 @@ public class DataAccess {
 				+ " getDatabBaseOpenMode: " + c.getDataBaseOpenMode());
 
 		String fileName = getDBInitializationName(initializeMode);
+		
+		URL resourceUrl = getClass().getClassLoader().getResource(fileName);
+		fileName = resourceUrl != null ?
+				"src/main/resources/" + fileName :
+				"resources/" + fileName;
 
 		if (c.isDatabaseLocal()) {
 			emf = Persistence.createEntityManagerFactory("objectdb:" + fileName);
