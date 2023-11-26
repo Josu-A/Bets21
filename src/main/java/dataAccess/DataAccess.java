@@ -344,6 +344,26 @@ public class DataAccess {
 		}
 		return res;
 	}
+	
+	/**
+	 * This method retrieves from the database the dates for which there are
+	 * events
+	 * 
+	 * @return collection of dates
+	 */
+	public Vector<Date> getEvents() {
+		System.out.println(">> DataAccess: getEvents");
+		Vector<Date> res = new Vector<Date>();
+
+		TypedQuery<Date> query = db.createQuery(
+				"SELECT DISTINCT ev.eventDate FROM Event ev", Date.class);
+		List<Date> dates = query.getResultList();
+		for (Date d : dates) {
+			System.out.println(d.toString());
+			res.add(d);
+		}
+		return res;
+	}
 
 	public void open(boolean initializeMode) {
 

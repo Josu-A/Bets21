@@ -141,6 +141,20 @@ public class BLFacadeImplementation implements BLFacade {
 		dbManager.close();
 		return dates;
 	}
+	
+	/**
+	 * This method invokes the data access to retrieve the dates for which
+	 * there are events
+	 * 
+	 * @return collection of dates
+	 */
+	@WebMethod
+	public Vector<Date> getEvents() {
+		dbManager.open(false);
+		Vector<Date> dates = dbManager.getEvents();
+		dbManager.close();
+		return dates;
+	}
 
 	public void close() {
 		DataAccess dB4oManager = new DataAccess(false);
